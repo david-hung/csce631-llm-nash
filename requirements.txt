@@ -5,5 +5,5 @@ pandas>=2.0
 jupyter>=1.0
 nashpy>=0.0.19
 python-dotenv>=1.0
-requests>=2.31
+openai>=1.30
 tqdm>=4.66
