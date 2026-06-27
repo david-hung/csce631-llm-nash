@@ -79,20 +79,19 @@ class TAMUClient:
 
         for attempt in range(retries):
             try:
-                # TAMU gateway returns SSE chunks via the openai SDK 2.x —
-                # use stream=True and collect all delta content.
-                stream = self.client.chat.completions.create(**kwargs, stream=True)
-                content = ""
-                for chunk in stream:
-                    if isinstance(chunk, str):
-                        # raw SSE line — skip metadata
-                        continue
-                    delta = chunk.choices[0].delta if chunk.choices else None
-                    if delta and delta.content:
-                        content += delta.content
-                content = content.strip()
-                _raise_if_budget_error(content)
-                return content
+                response = self.client.chat.completions.create(**kwargs, stream=False)
+                # Gateway returns error in response.error with choices=None
+                error = getattr(response, "error", None)
+                if error:
+                    msg = error.get("message", str(error)) if isinstance(error, dict) else str(error)
+                    _raise_if_budget_error(msg)
+                    raise RuntimeError(f"Gateway error: {msg}")
+                if not response.choices:
+                    raise RuntimeError("Empty choices in response")
+                usage = getattr(response, "usage", None)
+                if usage:
+                    self._total_tokens += getattr(usage, "total_tokens", 0)
+                return (response.choices[0].message.content or "").strip()
             except openai.RateLimitError:
                 time.sleep(2 ** attempt)
             except openai.AuthenticationError:
@@ -123,7 +122,8 @@ class TAMUClient:
 
 def _raise_if_budget_error(content: str) -> None:
     """Raise a clear error if the gateway returned a budget-exceeded message."""
-    if "Budget Exceeded" in content or "exceeded your daily budget" in content:
+    triggers = ("Budget Exceeded", "exceeded your daily budget", "Budget has been exceeded", "budget_exceeded")
+    if any(t.lower() in content.lower() for t in triggers):
         raise RuntimeError(
             "Daily budget exceeded on TAMU gateway. "
             "Wait until midnight CST for the cap to reset, then try again."
