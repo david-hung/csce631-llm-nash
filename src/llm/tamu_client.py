@@ -79,15 +79,28 @@ class TAMUClient:
 
         for attempt in range(retries):
             try:
-                response = self.client.chat.completions.create(**kwargs)
-                self._total_tokens += getattr(response.usage, "total_tokens", 0)
-                return response.choices[0].message.content or ""
+                # TAMU gateway returns SSE chunks via the openai SDK 2.x —
+                # use stream=True and collect all delta content.
+                stream = self.client.chat.completions.create(**kwargs, stream=True)
+                content = ""
+                for chunk in stream:
+                    if isinstance(chunk, str):
+                        # raw SSE line — skip metadata
+                        continue
+                    delta = chunk.choices[0].delta if chunk.choices else None
+                    if delta and delta.content:
+                        content += delta.content
+                content = content.strip()
+                _raise_if_budget_error(content)
+                return content
             except openai.RateLimitError:
                 time.sleep(2 ** attempt)
             except openai.AuthenticationError:
                 raise RuntimeError(
                     "401/403: Cookie expired. Log into chat.tamu.ai and refresh TAMU_CF_COOKIE in .env."
                 )
+            except RuntimeError:
+                raise
             except Exception as e:
                 if attempt < retries - 1:
                     time.sleep(1)
@@ -106,6 +119,15 @@ class TAMUClient:
     @property
     def total_tokens_used(self) -> int:
         return self._total_tokens
+
+
+def _raise_if_budget_error(content: str) -> None:
+    """Raise a clear error if the gateway returned a budget-exceeded message."""
+    if "Budget Exceeded" in content or "exceeded your daily budget" in content:
+        raise RuntimeError(
+            "Daily budget exceeded on TAMU gateway. "
+            "Wait until midnight CST for the cap to reset, then try again."
+        )
 
 
 GAME_SYSTEM_PROMPT = (
