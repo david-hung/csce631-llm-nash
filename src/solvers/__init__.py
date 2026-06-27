@@ -1,2 +1,2 @@
-from .nash_solver import compute_nash_equilibria, support_enumeration_nash
+from .nash_solver import compute_nash_equilibria
 from .exploitability import compute_exploitability

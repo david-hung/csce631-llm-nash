@@ -79,9 +79,15 @@ def _try_percentage_mix(response: str, actions: List[str]) -> np.ndarray | None:
     found_any = False
     response_l = response.lower()
     for i, action in enumerate(actions):
-        pattern = rf'(\d+(?:\.\d+)?)\s*%.*?{re.escape(action.lower())}'
-        alt_pattern = rf'{re.escape(action.lower())}.*?(\d+(?:\.\d+)?)\s*%'
-        for pat in [pattern, alt_pattern]:
+        action_l = re.escape(action.lower())
+        # "Cooperate 40%" or "cooperate: 40%" — action then nearby number%
+        # "40% Cooperate" or "40% on Cooperate" — number% then nearby action
+        # Use [^%]* to avoid crossing other percentage values
+        patterns = [
+            rf'{action_l}[^%\d]{{0,20}}(\d+(?:\.\d+)?)\s*%',
+            rf'(\d+(?:\.\d+)?)\s*%[^%\d]{{0,20}}{action_l}',
+        ]
+        for pat in patterns:
             m = re.search(pat, response_l)
             if m:
                 probs[i] = float(m.group(1)) / 100.0
