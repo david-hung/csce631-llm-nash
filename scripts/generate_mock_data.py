@@ -125,12 +125,12 @@ def main():
         for T in TEMPERATURES:
             responses = [mock_response_for_game(g.name, g.row_actions, T) for _ in range(N_QUERIES)]
             temp_cache[g.name][str(T)] = responses
-            print(f"  {g.name[:40]:40s} T={T}  → {responses[0][:50]}")
+            print(f"  {g.name[:40]:40s} T={T}  -> {responses[0][:50]}")
 
     path = RESPONSES_DIR / 'responses_temp_sweep.json'
     with open(path, 'w') as f:
         json.dump(temp_cache, f, indent=2)
-    print(f"\nSaved temperature sweep mock data → {path}")
+    print(f"\nSaved temperature sweep mock data -> {path}")
 
     # Model comparison cache
     model_cache = {}
@@ -149,7 +149,7 @@ def main():
     path2 = RESPONSES_DIR / 'responses_model_compare.json'
     with open(path2, 'w') as f:
         json.dump(model_cache, f, indent=2)
-    print(f"Saved model comparison mock data → {path2}")
+    print(f"Saved model comparison mock data -> {path2}")
     print("\nDone. You can now run the full notebook without the TAMU cookie.")
     print("Replace mock data with real API responses once you have the cookie.")
 
