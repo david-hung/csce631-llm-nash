@@ -1,0 +1,254 @@
+{
+  "gpt-mini|Prisoner's Dilemma (Classic)": [
+    "Defect",
+    "Defect",
+    "Defect",
+    "Defect",
+    "Defect"
+  ],
+  "gpt-mini|Prisoner's Dilemma (High Stakes)": [
+    "Defect",
+    "Defect",
+    "Defect",
+    "Defect",
+    "Defect"
+  ],
+  "gpt-mini|Prisoner's Dilemma (Low Stakes)": [
+    "Defect",
+    "Defect",
+    "Defect",
+    "Defect",
+    "Defect"
+  ],
+  "gpt-mini|Coordination Game": [
+    "Option A",
+    "Option A",
+    "Option A",
+    "Option A",
+    "Option A"
+  ],
+  "gpt-mini|Battle of the Sexes": [
+    "{\"Opera\": 0.6666666666666666, \"Football\": 0.3333333333333333}",
+    "{\"Opera\": 0.6666666666666666, \"Football\": 0.3333333333333333}",
+    "{\"Opera\": 0.6666666666666666, \"Football\": 0.3333333333333333}",
+    "{\"Opera\": 0.6666666666666666, \"Football\": 0.3333333333333333}",
+    "{\"Opera\": 0.6666666666666666, \"Football\": 0.3333333333333333}"
+  ],
+  "gpt-mini|Stag Hunt": [
+    "Hare",
+    "Hare",
+    "Hare",
+    "Hare",
+    "Hare"
+  ],
+  "gpt-mini|Matching Pennies": [
+    "{\"Heads\": 0.5, \"Tails\": 0.5}",
+    "{\"Heads\": 0.5, \"Tails\": 0.5}",
+    "{\"Heads\": 0.5, \"Tails\": 0.5}",
+    "{\"Heads\": 0.5, \"Tails\": 0.5}",
+    "{\"Heads\": 0.5, \"Tails\": 0.5}"
+  ],
+  "gpt-mini|Rock-Paper-Scissors": [
+    "{\"Rock\": 0.3333333333333333, \"Paper\": 0.3333333333333333, \"Scissors\": 0.3333333333333333}",
+    "{\"Rock\": 0.3333333333333333, \"Paper\": 0.3333333333333333, \"Scissors\": 0.3333333333333333}",
+    "{\"Rock\": 0.3333333333333333, \"Paper\": 0.3333333333333333, \"Scissors\": 0.3333333333333333}",
+    "{\"Rock\": 0.3333333333333333, \"Paper\": 0.3333333333333333, \"Scissors\": 0.3333333333333333}",
+    "{\"Rock\": 0.3333333333333333, \"Paper\": 0.3333333333333333, \"Scissors\": 0.3333333333333333}"
+  ],
+  "gpt-mini|Nash Bargaining (Symmetric Split-100)": [
+    "Demand 50",
+    "Demand 50",
+    "Demand 50",
+    "Demand 50",
+    "Demand 50"
+  ],
+  "gpt-mini|Nash Bargaining (Asymmetric)": [
+    "Demand 60",
+    "Demand 60",
+    "Demand 60",
+    "Demand 60",
+    "Demand 60"
+  ],
+  "gpt-mini|Chicken (Hawk-Dove)": [
+    "Dove (yield)",
+    "Dove (yield)",
+    "Dove (yield)",
+    "Dove (yield)",
+    "Dove (yield)"
+  ],
+  "gpt-mini|3x3 General-Sum Game": [
+    "Action A",
+    "Action A",
+    "Action A",
+    "Action A",
+    "Action A"
+  ],
+  "haiku|Prisoner's Dilemma (Classic)": [
+    "Defect",
+    "Defect",
+    "Defect",
+    "Defect",
+    "Defect"
+  ],
+  "haiku|Prisoner's Dilemma (High Stakes)": [
+    "Defect",
+    "Defect",
+    "Defect",
+    "Defect",
+    "Defect"
+  ],
+  "haiku|Prisoner's Dilemma (Low Stakes)": [
+    "Defect",
+    "Defect",
+    "Defect",
+    "Defect",
+    "Defect"
+  ],
+  "haiku|Coordination Game": [
+    "Option A",
+    "Option A",
+    "Option A",
+    "Option A",
+    "Option A"
+  ],
+  "haiku|Battle of the Sexes": [
+    "{\"Opera\": 0.667, \"Football\": 0.333}",
+    "{\"Opera\": 0.667, \"Football\": 0.333}",
+    "{\"Opera\": 0.667, \"Football\": 0.333}",
+    "{\"Opera\": 0.667, \"Football\": 0.333}",
+    "{\"Opera\": 0.667, \"Football\": 0.333}"
+  ],
+  "haiku|Stag Hunt": [
+    "Hare",
+    "Hare",
+    "Hare",
+    "Hare",
+    "Hare"
+  ],
+  "haiku|Matching Pennies": [
+    "{\"Heads\": 0.5, \"Tails\": 0.5}",
+    "{\"Heads\": 0.5, \"Tails\": 0.5}",
+    "{\"Heads\": 0.5, \"Tails\": 0.5}",
+    "{\"Heads\": 0.5, \"Tails\": 0.5}",
+    "{\"Heads\": 0.5, \"Tails\": 0.5}"
+  ],
+  "haiku|Rock-Paper-Scissors": [
+    "{\"Rock\": 0.333, \"Paper\": 0.333, \"Scissors\": 0.334}",
+    "{\"Rock\": 0.333, \"Paper\": 0.333, \"Scissors\": 0.334}",
+    "{\"Rock\": 0.333, \"Paper\": 0.333, \"Scissors\": 0.334}",
+    "{\"Rock\": 0.333, \"Paper\": 0.333, \"Scissors\": 0.334}",
+    "{\"Rock\": 0.333, \"Paper\": 0.333, \"Scissors\": 0.334}"
+  ],
+  "haiku|Nash Bargaining (Symmetric Split-100)": [
+    "Demand 50",
+    "Demand 50",
+    "Demand 50",
+    "Demand 50",
+    "Demand 50"
+  ],
+  "haiku|Nash Bargaining (Asymmetric)": [
+    "Demand 90",
+    "Demand 90",
+    "Demand 90",
+    "Demand 90",
+    "Demand 90"
+  ],
+  "haiku|Chicken (Hawk-Dove)": [
+    "{\"Hawk (aggressive)\": 0.5, \"Dove (yield)\": 0.5}",
+    "{\"Hawk (aggressive)\": 0.5, \"Dove (yield)\": 0.5}",
+    "{\"Hawk (aggressive)\": 0.5, \"Dove (yield)\": 0.5}",
+    "{\"Hawk (aggressive)\": 0.5, \"Dove (yield)\": 0.5}",
+    "{\"Hawk (aggressive)\": 0.5, \"Dove (yield)\": 0.5}"
+  ],
+  "haiku|3x3 General-Sum Game": [
+    "Action A",
+    "Action A",
+    "Action A",
+    "Action A",
+    "Action A"
+  ],
+  "sonnet|Prisoner's Dilemma (Classic)": [
+    "Defect",
+    "Defect",
+    "Defect",
+    "Defect",
+    "Defect"
+  ],
+  "sonnet|Prisoner's Dilemma (High Stakes)": [
+    "Defect",
+    "Defect",
+    "Defect",
+    "Defect",
+    "Defect"
+  ],
+  "sonnet|Prisoner's Dilemma (Low Stakes)": [
+    "Defect",
+    "Defect",
+    "Defect",
+    "Defect",
+    "Defect"
+  ],
+  "sonnet|Coordination Game": [
+    "Option A",
+    "Option A",
+    "Option A",
+    "Option A",
+    "Option A"
+  ],
+  "sonnet|Battle of the Sexes": [
+    "{\"Opera\": 0.6667, \"Football\": 0.3333}",
+    "{\"Opera\": 0.6667, \"Football\": 0.3333}",
+    "{\"Opera\": 0.6667, \"Football\": 0.3333}",
+    "{\"Opera\": 0.6667, \"Football\": 0.3333}",
+    "{\"Opera\": 0.6667, \"Football\": 0.3333}"
+  ],
+  "sonnet|Stag Hunt": [
+    "Stag",
+    "Stag",
+    "Stag",
+    "Stag",
+    "Stag"
+  ],
+  "sonnet|Matching Pennies": [
+    "{\"Heads\": 0.5, \"Tails\": 0.5}",
+    "{\"Heads\": 0.5, \"Tails\": 0.5}",
+    "{\"Heads\": 0.5, \"Tails\": 0.5}",
+    "{\"Heads\": 0.5, \"Tails\": 0.5}",
+    "{\"Heads\": 0.5, \"Tails\": 0.5}"
+  ],
+  "sonnet|Rock-Paper-Scissors": [
+    "{\"Rock\": 0.333, \"Paper\": 0.333, \"Scissors\": 0.334}",
+    "{\"Rock\": 0.333, \"Paper\": 0.333, \"Scissors\": 0.334}",
+    "{\"Rock\": 0.333, \"Paper\": 0.333, \"Scissors\": 0.334}",
+    "{\"Rock\": 0.333, \"Paper\": 0.333, \"Scissors\": 0.334}",
+    "{\"Rock\": 0.333, \"Paper\": 0.333, \"Scissors\": 0.334}"
+  ],
+  "sonnet|Nash Bargaining (Symmetric Split-100)": [
+    "Demand 50",
+    "Demand 50",
+    "Demand 50",
+    "Demand 50",
+    "Demand 50"
+  ],
+  "sonnet|Nash Bargaining (Asymmetric)": [
+    "Looking at this Nash bargaining game, I need to find the best strategy given that demands exceeding a total of 100 result in significantly reduced payoffs.\n\nKey observations:\n- When total demands \u2264 100, both players receive what they demand\n- When total demands > 100, payoffs drop significantly (often to 30, 10)\n- This creates a coordination problem\n\nIf my opponent demands 50, my best response is to demand 50 (getting 50 rather than 30 if I demand more). Similarly, if I demand 50, my opponent's best response is to demand 50. This makes (Demand 50, Demand 50) a Nash equilibrium with equal split of 100.\n\n**Demand 50**",
+    "Looking at this Nash bargaining game, I need to find the best strategy given that demands exceeding a total of 100 result in significantly reduced payoffs.\n\nKey observations:\n- When total demands \u2264 100, both players receive what they demand\n- When total demands > 100, payoffs drop significantly (often to 30, 10)\n- This creates a coordination problem\n\nIf my opponent demands 50, my best response is to demand 50 (getting 50 rather than 30 if I demand more). Similarly, if I demand 50, my opponent's best response is to demand 50. This makes (Demand 50, Demand 50) a Nash equilibrium with equal split of 100.\n\n**Demand 50**",
+    "Looking at this Nash bargaining game, I need to find the best strategy given that demands exceeding a total of 100 result in significantly reduced payoffs.\n\nKey observations:\n- When total demands \u2264 100, both players receive what they demand\n- When total demands > 100, payoffs drop significantly (often to 30, 10)\n- This creates a coordination problem\n\nIf my opponent demands 50, my best response is to demand 50 (getting 50 rather than 30 if I demand more). Similarly, if I demand 50, my opponent's best response is to demand 50. This makes (Demand 50, Demand 50) a Nash equilibrium with equal split of 100.\n\n**Demand 50**",
+    "Looking at this Nash bargaining game, I need to find the best strategy given that demands exceeding a total of 100 result in significantly reduced payoffs.\n\nKey observations:\n- When total demands \u2264 100, both players receive what they demand\n- When total demands > 100, payoffs drop significantly (often to 30, 10)\n- This creates a coordination problem\n\nIf my opponent demands 50, my best response is to demand 50 (getting 50 rather than 30 if I demand more). Similarly, if I demand 50, my opponent's best response is to demand 50. This makes (Demand 50, Demand 50) a Nash equilibrium with equal split of 100.\n\n**Demand 50**",
+    "Looking at this Nash bargaining game, I need to find the best strategy given that demands exceeding a total of 100 result in significantly reduced payoffs.\n\nKey observations:\n- When total demands \u2264 100, both players receive what they demand\n- When total demands > 100, payoffs drop significantly (often to 30, 10)\n- This creates a coordination problem\n\nIf my opponent demands 50, my best response is to demand 50 (getting 50 rather than 30 if I demand more). Similarly, if I demand 50, my opponent's best response is to demand 50. This makes (Demand 50, Demand 50) a Nash equilibrium with equal split of 100.\n\n**Demand 50**"
+  ],
+  "sonnet|Chicken (Hawk-Dove)": [
+    "{\"Hawk (aggressive)\": 0.5, \"Dove (yield)\": 0.5}",
+    "{\"Hawk (aggressive)\": 0.5, \"Dove (yield)\": 0.5}",
+    "{\"Hawk (aggressive)\": 0.5, \"Dove (yield)\": 0.5}",
+    "{\"Hawk (aggressive)\": 0.5, \"Dove (yield)\": 0.5}",
+    "{\"Hawk (aggressive)\": 0.5, \"Dove (yield)\": 0.5}"
+  ],
+  "sonnet|3x3 General-Sum Game": [
+    "Action A",
+    "Action A",
+    "Action A",
+    "Action A",
+    "Action A"
+  ]
+}

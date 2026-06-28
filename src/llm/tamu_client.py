@@ -74,7 +74,7 @@ class TAMUClient:
             model=self.model_id,
             messages=messages,
             temperature=1 if is_thinking else self.temperature,
-            max_tokens=16384 if is_thinking else 512,
+            max_tokens=16384
         )
 
         for attempt in range(retries):
@@ -91,7 +91,13 @@ class TAMUClient:
                 usage = getattr(response, "usage", None)
                 if usage:
                     self._total_tokens += getattr(usage, "total_tokens", 0)
-                return (response.choices[0].message.content or "").strip()
+                choice = response.choices[0]
+                if choice.finish_reason == "length" and not (choice.message.content or "").strip():
+                    raise RuntimeError(
+                        f"Model hit max_tokens ({kwargs['max_tokens']}) during reasoning with no output. "
+                        "Increase max_tokens."
+                    )
+                return (choice.message.content or "").strip()
             except openai.RateLimitError:
                 time.sleep(2 ** attempt)
             except openai.AuthenticationError:

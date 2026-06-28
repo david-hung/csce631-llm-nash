@@ -1,0 +1,278 @@
+{
+  "Prisoner's Dilemma (Classic)": {
+    "0.0": [
+      "Defect",
+      "Defect",
+      "Defect",
+      "Defect",
+      "Defect"
+    ],
+    "0.5": [
+      "Defect",
+      "Defect",
+      "Defect",
+      "Defect",
+      "Defect"
+    ],
+    "1.0": [
+      "Defect",
+      "Defect",
+      "Defect",
+      "Defect",
+      "Defect"
+    ]
+  },
+  "Prisoner's Dilemma (High Stakes)": {
+    "0.0": [
+      "Defect",
+      "Defect",
+      "Defect",
+      "Defect",
+      "Defect"
+    ],
+    "0.5": [
+      "Defect",
+      "Defect",
+      "Defect",
+      "Defect",
+      "Defect"
+    ],
+    "1.0": [
+      "Defect",
+      "Defect",
+      "Defect",
+      "Defect",
+      "Defect"
+    ]
+  },
+  "Prisoner's Dilemma (Low Stakes)": {
+    "0.0": [
+      "Defect",
+      "Defect",
+      "Defect",
+      "Defect",
+      "Defect"
+    ],
+    "0.5": [
+      "Defect",
+      "Defect",
+      "Defect",
+      "Defect",
+      "Defect"
+    ],
+    "1.0": [
+      "Defect",
+      "Defect",
+      "Defect",
+      "Defect",
+      "Defect"
+    ]
+  },
+  "Coordination Game": {
+    "0.0": [
+      "Option A",
+      "Option A",
+      "Option A",
+      "Option A",
+      "Option A"
+    ],
+    "0.5": [
+      "Option A",
+      "Option A",
+      "Option A",
+      "Option A",
+      "Option A"
+    ],
+    "1.0": [
+      "{\"Option A\": 0.5, \"Option B\": 0.5}",
+      "{\"Option A\": 0.5, \"Option B\": 0.5}",
+      "{\"Option A\": 0.5, \"Option B\": 0.5}",
+      "{\"Option A\": 0.5, \"Option B\": 0.5}",
+      "{\"Option A\": 0.5, \"Option B\": 0.5}"
+    ]
+  },
+  "Battle of the Sexes": {
+    "0.0": [
+      "Opera",
+      "Opera",
+      "Opera",
+      "Opera",
+      "Opera"
+    ],
+    "0.5": [
+      "Opera",
+      "Opera",
+      "Opera",
+      "Opera",
+      "Opera"
+    ],
+    "1.0": [
+      "Opera",
+      "Opera",
+      "Opera",
+      "Opera",
+      "Opera"
+    ]
+  },
+  "Matching Pennies": {
+    "0.0": [
+      "{\"Heads\": 0.5, \"Tails\": 0.5}",
+      "{\"Heads\": 0.5, \"Tails\": 0.5}",
+      "{\"Heads\": 0.5, \"Tails\": 0.5}",
+      "{\"Heads\": 0.5, \"Tails\": 0.5}",
+      "{\"Heads\": 0.5, \"Tails\": 0.5}"
+    ],
+    "0.5": [
+      "{\"Heads\": 0.5, \"Tails\": 0.5}",
+      "{\"Heads\": 0.5, \"Tails\": 0.5}",
+      "{\"Heads\": 0.5, \"Tails\": 0.5}",
+      "{\"Heads\": 0.5, \"Tails\": 0.5}",
+      "{\"Heads\": 0.5, \"Tails\": 0.5}"
+    ],
+    "1.0": [
+      "{\"Heads\": 0.5, \"Tails\": 0.5}",
+      "{\"Heads\": 0.5, \"Tails\": 0.5}",
+      "{\"Heads\": 0.5, \"Tails\": 0.5}",
+      "{\"Heads\": 0.5, \"Tails\": 0.5}",
+      "{\"Heads\": 0.5, \"Tails\": 0.5}"
+    ]
+  },
+  "Rock-Paper-Scissors": {
+    "0.0": [
+      "{\"Rock\": 0.3333333333333333, \"Paper\": 0.3333333333333333, \"Scissors\": 0.3333333333333333}",
+      "{\"Rock\": 0.3333333333333333, \"Paper\": 0.3333333333333333, \"Scissors\": 0.3333333333333333}",
+      "{\"Rock\": 0.3333333333333333, \"Paper\": 0.3333333333333333, \"Scissors\": 0.3333333333333333}",
+      "{\"Rock\": 0.3333333333333333, \"Paper\": 0.3333333333333333, \"Scissors\": 0.3333333333333333}",
+      "{\"Rock\": 0.3333333333333333, \"Paper\": 0.3333333333333333, \"Scissors\": 0.3333333333333333}"
+    ],
+    "0.5": [
+      "{\"Rock\": 0.3333333333333333, \"Paper\": 0.3333333333333333, \"Scissors\": 0.3333333333333333}",
+      "{\"Rock\": 0.3333333333333333, \"Paper\": 0.3333333333333333, \"Scissors\": 0.3333333333333333}",
+      "{\"Rock\": 0.3333333333333333, \"Paper\": 0.3333333333333333, \"Scissors\": 0.3333333333333333}",
+      "{\"Rock\": 0.3333333333333333, \"Paper\": 0.3333333333333333, \"Scissors\": 0.3333333333333333}",
+      "{\"Rock\": 0.3333333333333333, \"Paper\": 0.3333333333333333, \"Scissors\": 0.3333333333333333}"
+    ],
+    "1.0": [
+      "{\"Rock\": 0.3333333333333333, \"Paper\": 0.3333333333333333, \"Scissors\": 0.3333333333333333}",
+      "{\"Rock\": 0.3333333333333333, \"Paper\": 0.3333333333333333, \"Scissors\": 0.3333333333333333}",
+      "{\"Rock\": 0.3333333333333333, \"Paper\": 0.3333333333333333, \"Scissors\": 0.3333333333333333}",
+      "{\"Rock\": 0.3333333333333333, \"Paper\": 0.3333333333333333, \"Scissors\": 0.3333333333333333}",
+      "{\"Rock\": 0.3333333333333333, \"Paper\": 0.3333333333333333, \"Scissors\": 0.3333333333333333}"
+    ]
+  },
+  "Stag Hunt": {
+    "0.0": [
+      "Stag",
+      "Stag",
+      "Stag",
+      "Stag",
+      "Stag"
+    ],
+    "0.5": [
+      "Hare",
+      "Hare",
+      "Hare",
+      "Hare",
+      "Hare"
+    ],
+    "1.0": [
+      "Hare",
+      "Hare",
+      "Hare",
+      "Hare",
+      "Hare"
+    ]
+  },
+  "Nash Bargaining (Asymmetric)": {
+    "0.0": [
+      "Demand 60",
+      "Demand 60",
+      "Demand 60",
+      "Demand 60",
+      "Demand 60"
+    ],
+    "0.5": [
+      "Demand 60",
+      "Demand 60",
+      "Demand 60",
+      "Demand 60",
+      "Demand 60"
+    ],
+    "1.0": [
+      "Demand 60",
+      "Demand 60",
+      "Demand 60",
+      "Demand 60",
+      "Demand 60"
+    ]
+  },
+  "Chicken (Hawk-Dove)": {
+    "0.0": [
+      "Dove (yield)",
+      "Dove (yield)",
+      "Dove (yield)",
+      "Dove (yield)",
+      "Dove (yield)"
+    ],
+    "0.5": [
+      "{\"Hawk (aggressive)\": 0.5, \"Dove (yield)\": 0.5}",
+      "{\"Hawk (aggressive)\": 0.5, \"Dove (yield)\": 0.5}",
+      "{\"Hawk (aggressive)\": 0.5, \"Dove (yield)\": 0.5}",
+      "{\"Hawk (aggressive)\": 0.5, \"Dove (yield)\": 0.5}",
+      "{\"Hawk (aggressive)\": 0.5, \"Dove (yield)\": 0.5}"
+    ],
+    "1.0": [
+      "Dove (yield)",
+      "Dove (yield)",
+      "Dove (yield)",
+      "Dove (yield)",
+      "Dove (yield)"
+    ]
+  },
+  "3x3 General-Sum Game": {
+    "0.0": [
+      "Action A",
+      "Action A",
+      "Action A",
+      "Action A",
+      "Action A"
+    ],
+    "0.5": [
+      "{\"Action A\": 0.25, \"Action B\": 0.4375, \"Action C\": 0.3125}",
+      "{\"Action A\": 0.25, \"Action B\": 0.4375, \"Action C\": 0.3125}",
+      "{\"Action A\": 0.25, \"Action B\": 0.4375, \"Action C\": 0.3125}",
+      "{\"Action A\": 0.25, \"Action B\": 0.4375, \"Action C\": 0.3125}",
+      "{\"Action A\": 0.25, \"Action B\": 0.4375, \"Action C\": 0.3125}"
+    ],
+    "1.0": [
+      "Action A",
+      "Action A",
+      "Action A",
+      "Action A",
+      "Action A"
+    ]
+  },
+  "Nash Bargaining (Symmetric Split-100)": {
+    "0.0": [
+      "Demand 50",
+      "Demand 50",
+      "Demand 50",
+      "Demand 50",
+      "Demand 50"
+    ],
+    "0.5": [
+      "Demand 50",
+      "Demand 50",
+      "Demand 50",
+      "Demand 50",
+      "Demand 50"
+    ],
+    "1.0": [
+      "Demand 50",
+      "Demand 50",
+      "Demand 50",
+      "Demand 50",
+      "Demand 50"
+    ]
+  }
+}
