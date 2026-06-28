@@ -19,13 +19,13 @@ Key questions:
 │   └── llm_nash_analysis.ipynb   # Main Jupyter notebook (primary deliverable)
 ├── src/
 │   ├── games/                    # Game payoff matrices + ground-truth NE
-│   ├── solvers/                  # LP-based Nash solver + exploitability
+│   ├── solvers/                  # Nash solver + exploitability
 │   ├── llm/                      # TAMU API client + response parser
 │   └── analysis/                 # Plots and aggregation
 ├── data/
-│   └── responses/                # Cached LLM response logs (JSON)
+│   └── responses/                # Cached LLM response JSON
 ├── report/
-│   └── report.md                 # Written report source
+│   └── report.tex                # LaTeX report source
 ├── requirements.txt
 └── README.md
 ```
@@ -37,9 +37,10 @@ pip install -r requirements.txt
 ```
 
 ### TAMU API
-See `TAMU-API-Guide.md` for cookie setup instructions. Set your session cookie in a `.env` file:
+Log into [chat.tamu.ai](https://chat.tamu.ai) with your NetID + Duo MFA, then copy the `CF_Authorization` cookie from DevTools (Application → Cookies). Add to a `.env` file:
 ```
-TAMU_API_COOKIE=<your-cookie-here>
+TAMU_CF_COOKIE=CF_Authorization=eyJ...
+TAMU_API_KEY=<your-api-key>
 ```
 
 ## Running the Notebook
