@@ -54,7 +54,7 @@ analyzed through the formal vocabulary of the course.
 
 We construct twelve two-player normal-form games with analytically known or
 numerically verified Nash equilibria (Table~\ref{tab:games}).
-Games are encoded as payoff matrix pairs $(A, B) \in \mathbb{R}^{m \times n}$
+Games are encoded as payoff matrix pairs $(A, B) \in \mathbb{R}^{m \times n}$~\cite{nisan2007}
 where $A_{ij}$ is the row player's payoff and $B_{ij}$ is the column player's payoff
 when the row player chooses action $i$ and the column player chooses action $j$.
 
@@ -103,8 +103,8 @@ For a strategy profile $(\sigma_1, \sigma_2)$, total exploitability is:
 \end{align}
 At a Nash equilibrium $\varepsilon = 0$ by definition.
 This metric connects directly to the regret-minimization framework of
-Lectures~7--9: a no-regret learner converges to Nash, so exploitability bounds
-how far the LLM deviates from a no-regret policy.
+Lectures~7--9~\cite{zinkevich2007}: a no-regret learner converges to Nash, so
+exploitability bounds how far the LLM deviates from a no-regret policy.
 
 We fix the column player's strategy to the Nash equilibrium strategy and measure
 the row player's (LLM's) exploitability against that Nash opponent.
@@ -173,8 +173,7 @@ Chicken             & 0.000 & 0.500 & 0.000 \\
 \end{table}
 
 Figure~\ref{fig:heatmap} visualizes the exploitability landscape as a heatmap.
-Figure~\ref{fig:strategies} shows per-game strategy comparisons for the four most
-illustrative games.
+Figure~\ref{fig:bias} shows signed strategy deviation from NE per game at $T{=}0.5$.
 
 \begin{figure}[h]
   \centering
