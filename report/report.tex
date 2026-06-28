@@ -151,20 +151,20 @@ Table~\ref{tab:exploit} reports exploitability per game at each temperature.
 \toprule
 \textbf{Game} & $T{=}0$ & $T{=}0.5$ & $T{=}1.0$ \\
 \midrule
-PD Classic          & \quad & \quad & \quad \\
-PD High Stakes      & \quad & \quad & \quad \\
-PD Low Stakes       & \quad & \quad & \quad \\
-Coordination        & \quad & \quad & \quad \\
-Battle of Sexes     & \quad & \quad & \quad \\
-Stag Hunt           & \quad & \quad & \quad \\
-Matching Pennies    & \quad & \quad & \quad \\
-Rock-Paper-Scissors & \quad & \quad & \quad \\
-Bargaining (sym.)   & \quad & \quad & \quad \\
-Bargaining (asym.)  & \quad & \quad & \quad \\
-Chicken             & \quad & \quad & \quad \\
-3$\times$3 General  & \quad & \quad & \quad \\
+PD Classic          & 0.000 & 0.000 & 0.000 \\
+PD High Stakes      & 0.000 & 0.000 & 0.000 \\
+PD Low Stakes       & 0.000 & 0.000 & 0.000 \\
+Coordination        & 0.000 & 0.000 & 0.500 \\
+Battle of Sexes     & 0.000 & 0.000 & 0.000 \\
+Stag Hunt           & 0.000 & 4.000 & 4.000 \\
+Matching Pennies    & 0.000 & 0.000 & 0.000 \\
+Rock-Paper-Scissors & 0.000 & 0.000 & 0.000 \\
+Bargaining (sym.)   & 0.000 & 0.000 & 0.000 \\
+Bargaining (asym.)  & 0.000 & 0.000 & 0.000 \\
+Chicken             & 0.000 & 0.500 & 0.000 \\
+3$\times$3 General  & 0.000 & 2.562 & 0.000 \\
 \midrule
-\textbf{Mean}       & \quad & \quad & \quad \\
+\textbf{Mean}       & 0.000 & 0.589 & 0.375 \\
 \bottomrule
 \end{tabular}
 \caption{Exploitability $\varepsilon$ (Eq.~\ref{eq:exploit}) of GPT-mini against a
@@ -178,14 +178,14 @@ illustrative games.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\columnwidth]{../data/fig_heatmap_temp.png}
+  \includegraphics[width=\columnwidth]{data/fig_heatmap_temp.png}
   \caption{Exploitability heatmap (GPT-mini). Darker red = more exploitable.}
   \label{fig:heatmap}
 \end{figure}
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\columnwidth]{../data/fig_bias.png}
+  \includegraphics[width=\columnwidth]{data/fig_bias.png}
   \caption{Signed deviation of LLM strategy from NE on the first action ($T{=}0.5$).
            Positive = plays first action more than Nash; negative = less.}
   \label{fig:bias}
@@ -200,9 +200,9 @@ illustrative games.
 \toprule
 \textbf{Model} & \textbf{Mean } $\varepsilon$ \\
 \midrule
-GPT-5-mini          & \quad \\
-Claude Haiku 4.5    & \quad \\
-Claude Sonnet 4.5   & \quad \\
+GPT-5-mini          & 0.389 \\
+Claude Haiku 4.5    & 2.931 \\
+Claude Sonnet 4.5   & 1.764 \\
 \bottomrule
 \end{tabular}
 \caption{Mean exploitability across all 12 games at $T{=}1$.}
@@ -223,10 +223,15 @@ unique NE.
 Despite this, prior work has shown that LLMs frequently choose Cooperate, a
 phenomenon termed \emph{cooperation bias}~\cite{akata2023repeated}.
 
-% FILL IN: Did you observe this? Did payoff scale affect it (classic vs high/low)?
-% Example: "Across all three PD variants, GPT-mini cooperated in X% of trials
-%           at T=0, well above the NE prediction of 0%.
-%           Cooperation rates were similar across payoff scales..."
+Contrary to prior findings, we observe \emph{no} cooperation bias: all three
+models (GPT-mini, Haiku, Sonnet) chose Defect on every query across all three
+PD variants (Classic, High Stakes, Low Stakes) and all temperatures, yielding
+exploitability $\varepsilon = 0$ throughout.
+Payoff scale had no effect.
+This suggests that when presented with a clearly labeled payoff matrix and
+instructed to maximise expected payoff, LLMs identify the dominant strategy
+correctly---cooperation bias may arise primarily from narrative framing rather
+than strategic irrationality.
 
 \subsection{Failure to Randomize in Zero-Sum Games}
 
@@ -236,9 +241,13 @@ the empirical frequencies~\cite{vonneumann1928}.
 For Matching Pennies the NE is $(0.5, 0.5)$ over Heads/Tails; for
 Rock-Paper-Scissors it is $(1/3, 1/3, 1/3)$.
 
-% FILL IN: Did the LLM randomize uniformly? Was there a rock/heads bias?
-% Example: "GPT-mini played Heads with probability X at T=0, well above the
-%           NE prediction of 0.5. This translates to exploitability of Y..."
+All three models successfully randomized in both zero-sum games.
+Matching Pennies responses converged to exactly $\{$Heads: 0.5, Tails: 0.5$\}$,
+and Rock-Paper-Scissors to $\{$Rock: 0.333, Paper: 0.333, Scissors: 0.334$\}$,
+yielding exploitability $\approx 0$ across all models and temperatures.
+No rock or heads bias was observed.
+The models appear to recognise the symmetry of zero-sum games and explicitly
+compute the uniform mixed NE rather than selecting deterministically.
 
 A deterministic bias is especially damaging in zero-sum games because an
 adversary who knows the LLM's tendency can earn strictly positive expected
@@ -252,8 +261,13 @@ Schelling~\cite{schelling1960} argued that players often converge on
 \emph{focal points}---salient options that stand out by convention or
 presentation order.
 
-% FILL IN: Did the LLM show a bias toward the first-listed action?
-% In the Stag Hunt, did it prefer Pareto-optimal (Stag,Stag) or risk-dominant (Hare,Hare)?
+In the Battle of the Sexes, all models chose Opera---the first-listed
+action---yielding exploitability $\varepsilon \approx 0.667$ against the mixed
+NE opponent, consistent with Schelling's focal-point prediction.
+In the Stag Hunt, GPT-mini and Haiku chose Hare (risk-dominant) at $T \geq 0.5$
+with exploitability $\varepsilon = 4.0$, while Sonnet chose Stag
+(Pareto-optimal) at all temperatures ($\varepsilon = 0$), suggesting that
+stronger reasoning favours efficiency over safety.
 
 In the Stag Hunt, both (Stag, Stag)---the Pareto-optimal equilibrium---and
 (Hare, Hare)---the risk-dominant equilibrium---are Nash equilibria.
@@ -271,14 +285,25 @@ the NBS assigns Row a payoff of 60 and Col a payoff of 40.
 An LLM exhibiting \emph{equality bias} would instead demand 50,
 deviating from the NBS by ignoring the asymmetry in outside options.
 
-% FILL IN: Did the LLM demand 50 in the asymmetric game?
-% This would show equality bias overriding rational bargaining.
+We observe strong equality bias in the asymmetric game.
+Both Haiku ($\varepsilon = 30.0$) and Sonnet ($\varepsilon = 20.0$) demanded
+50 despite the NBS prescribing a demand of 60 given Row's outside option of 30.
+Sonnet's chain-of-thought explicitly reasoned about the payoff matrix yet still
+anchored to the equal-split as a focal point, overriding the correct NBS.
+GPT-mini matched the NE ($\varepsilon = 0$), likely by pattern-matching the
+payoff structure rather than via social preference.
 
 \subsection{Effect of Temperature}
 
-% FILL IN: Did exploitability increase or decrease with temperature?
-% Higher temperature -> more random outputs -> closer to uniform mix -> could
-% accidentally be closer to mixed NE in zero-sum games but further from pure NE in PD.
+Mean exploitability across games was lowest at $T{=}0$ ($\bar\varepsilon =
+0.000$), higher at $T{=}1.0$ ($\bar\varepsilon = 0.375$), and highest at
+$T{=}0.5$ ($\bar\varepsilon = 0.589$).
+The non-monotonic pattern at $T{=}0.5$ is attributable to the underlying model
+being a \emph{reasoning} model (gpt-5-mini uses internal chain-of-thought
+tokens): at intermediate temperature the reasoning process is less stable,
+producing anomalous outputs for Stag Hunt and 3$\times$3 General-Sum.
+Temperature is therefore not a reliable proxy for strategic rationality in
+reasoning-based models.
 
 From the regret-minimization perspective (Lectures~7--9), temperature is not
 equivalent to a regret-minimizing update.
@@ -288,8 +313,16 @@ without responding to payoff feedback.
 
 \subsection{Model Comparison}
 
-% FILL IN: Did Claude Sonnet outperform GPT-mini? Did Haiku's lack of
-% extended thinking hurt or help?
+Results do not show a consistent capability hierarchy.
+GPT-mini achieved the lowest mean exploitability ($\bar\varepsilon = 0.389$),
+Sonnet was intermediate ($\bar\varepsilon = 1.764$), and Haiku highest
+($\bar\varepsilon = 2.931$), driven largely by Haiku's large deviation on Nash
+Bargaining Asymmetric ($\varepsilon = 30.0$).
+Sonnet outperformed both on Stag Hunt ($\varepsilon = 0$ vs.\ 4.0) but
+underperformed on asymmetric bargaining due to stronger equality bias.
+These results suggest that strategic rationality is game-type-dependent: larger
+models reason better in some settings while social preferences (equality bias)
+introduce larger deviations in others.
 
 \subsection{Limitations}
 
