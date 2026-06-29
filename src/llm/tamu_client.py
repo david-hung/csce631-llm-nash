@@ -80,6 +80,10 @@ class TAMUClient:
         for attempt in range(retries):
             try:
                 response = self.client.chat.completions.create(**kwargs, stream=False)
+                if isinstance(response, str):
+                    raise RuntimeError(
+                        "Cookie expired. Log into chat.tamu.ai and refresh TAMU_CF_COOKIE in .env."
+                    )
                 # Gateway returns error in response.error with choices=None
                 error = getattr(response, "error", None)
                 if error:
