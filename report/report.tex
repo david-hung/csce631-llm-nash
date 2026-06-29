@@ -261,9 +261,12 @@ Schelling~\cite{schelling1960} argued that players often converge on
 \emph{focal points}---salient options that stand out by convention or
 presentation order.
 
-In the Battle of the Sexes, all models chose Opera---the first-listed
-action---yielding exploitability $\varepsilon \approx 0.667$ against the mixed
-NE opponent, consistent with Schelling's focal-point prediction.
+In the Battle of the Sexes, GPT-mini chose Opera deterministically across the
+temperature sweep, selecting the first-listed pure Nash equilibrium---consistent
+with Schelling's focal-point prediction.
+In the model comparison at $T{=}1$, all three models returned the row player's
+mixed Nash equilibrium \{Opera: $2/3$, Football: $1/3$\}, yielding $\varepsilon
+\approx 0$.
 In the Stag Hunt, GPT-mini and Haiku chose Hare (risk-dominant) at $T \geq 0.5$
 with exploitability $\varepsilon = 4.0$, while Sonnet chose Stag
 (Pareto-optimal) at all temperatures ($\varepsilon = 0$), suggesting that
@@ -285,13 +288,13 @@ the NBS assigns Row a payoff of 60 and Col a payoff of 40.
 An LLM exhibiting \emph{equality bias} would instead demand 50,
 deviating from the NBS by ignoring the asymmetry in outside options.
 
-We observe strong equality bias in the asymmetric game.
-Both Haiku ($\varepsilon = 30.0$) and Sonnet ($\varepsilon = 20.0$) demanded
-50 despite the NBS prescribing a demand of 60 given Row's outside option of 30.
+We observe strong deviations from the NBS in the asymmetric game.
+Haiku demanded 90 ($\varepsilon = 30.0$), overclaiming far beyond the NBS of 60,
+while Sonnet demanded 50 ($\varepsilon = 20.0$), exhibiting equality bias by
+anchoring to an equal split despite the asymmetric outside options.
 Sonnet's chain-of-thought explicitly reasoned about the payoff matrix yet still
-anchored to the equal-split as a focal point, overriding the correct NBS.
-GPT-mini matched the NE ($\varepsilon = 0$), likely by pattern-matching the
-payoff structure rather than via social preference.
+converged to the equal-split focal point, overriding the correct NBS.
+GPT-mini matched the NE ($\varepsilon = 0$), correctly demanding 60.
 
 \subsection{Effect of Temperature}
 
@@ -316,10 +319,10 @@ without responding to payoff feedback.
 Results do not show a consistent capability hierarchy.
 GPT-mini achieved the lowest mean exploitability ($\bar\varepsilon = 0.389$),
 Sonnet was intermediate ($\bar\varepsilon = 1.764$), and Haiku highest
-($\bar\varepsilon = 2.931$), driven largely by Haiku's large deviation on Nash
+($\bar\varepsilon = 2.931$), driven largely by Haiku's overclaim of 90 on Nash
 Bargaining Asymmetric ($\varepsilon = 30.0$).
 Sonnet outperformed both on Stag Hunt ($\varepsilon = 0$ vs.\ 4.0) but
-underperformed on asymmetric bargaining due to stronger equality bias.
+underperformed on asymmetric bargaining due to equality bias (demanding 50).
 These results suggest that strategic rationality is game-type-dependent: larger
 models reason better in some settings while social preferences (equality bias)
 introduce larger deviations in others.
