@@ -5,7 +5,6 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{microtype}
-\usepackage{parskip}
 \usepackage{xurl}
 \setlength{\emergencystretch}{3em}
 
@@ -46,6 +45,9 @@ LLM responses are converted to probability distributions over actions, and
 \emph{exploitability} relative to the known NE is computed per game.
 The result is a quantitative map of where and how LLMs deviate from rational play,
 analyzed through the formal vocabulary of the course.
+Our key findings are: (1) no cooperation bias in social dilemmas, (2) correct
+randomization in zero-sum games, (3) focal-point selection in coordination games,
+and (4) systematic deviations in asymmetric bargaining.
 
 %% ─────────────────────────────────────────────
 \section{Method}
@@ -106,9 +108,8 @@ At a Nash equilibrium $\varepsilon = 0$ by definition.
 This metric connects directly to the regret-minimization framework of
 Lectures~7--9~\cite{zinkevich2007}: a no-regret learner converges to Nash, so
 exploitability bounds how far the LLM deviates from a no-regret policy.
-
-We fix the column player's strategy to the Nash equilibrium strategy and measure
-the row player's (LLM's) exploitability against that Nash opponent.
+We fix the column player to the NE strategy and measure the row player's (LLM's)
+exploitability against that Nash opponent.
 
 \subsection{LLM Querying}
 
@@ -141,10 +142,10 @@ The five distributions are averaged per cell.
 \subsection{Temperature Sweep (GPT-mini)}
 
 Table~\ref{tab:exploit} reports exploitability per game at each temperature.
-% ---- FILL IN AFTER EXPERIMENTS ----
-% Replace the placeholder values below with real numbers from the notebook.
+Figure~\ref{fig:heatmap} visualizes the exploitability landscape as a heatmap, and
+Figure~\ref{fig:bias} shows signed strategy deviation from NE per game at $T{=}0.5$.
 
-\begin{table}[h]
+\begin{table}[t]
 \centering
 \small
 \setlength{\tabcolsep}{4pt}
@@ -173,17 +174,15 @@ Chicken             & 0.000 & 0.500 & 0.000 \\
 \label{tab:exploit}
 \end{table}
 
-Figure~\ref{fig:heatmap} visualizes the exploitability landscape as a heatmap.
-Figure~\ref{fig:bias} shows signed strategy deviation from NE per game at $T{=}0.5$.
 
-\begin{figure}[h]
+\begin{figure}[t]
   \centering
   \includegraphics[width=\columnwidth]{data/fig_heatmap_temp.png}
   \caption{Exploitability heatmap (GPT-mini). Darker red = more exploitable.}
   \label{fig:heatmap}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[t]
   \centering
   \includegraphics[width=\columnwidth]{data/fig_bias.png}
   \caption{Signed deviation of LLM strategy from NE on the first action ($T{=}0.5$).
@@ -193,7 +192,9 @@ Figure~\ref{fig:bias} shows signed strategy deviation from NE per game at $T{=}0
 
 \subsection{Model Comparison ($T = 1$)}
 
-\begin{table}[h]
+Table~\ref{tab:models} reports mean exploitability across all 12 games for each model.
+
+\begin{table}[t]
 \centering
 \small
 \begin{tabular}{lc}
@@ -229,15 +230,15 @@ PD variants (Classic, High Stakes, Low Stakes) and all temperatures, yielding
 exploitability $\varepsilon = 0$ throughout.
 Payoff scale had no effect.
 This suggests that when presented with a clearly labeled payoff matrix and
-instructed to maximise expected payoff, LLMs identify the dominant strategy
+instructed to maximize expected payoff, LLMs identify the dominant strategy
 correctly. Cooperation bias may arise primarily from narrative framing rather
 than strategic irrationality.
 
-\subsection{Failure to Randomize in Zero-Sum Games}
+\subsection{Randomization in Zero-Sum Games}
 
 In zero-sum games, the unique NE requires uniform randomization: any
 non-uniform strategy is exploitable by an opponent who best-responds to
-the empirical frequencies~\cite{vonneumann1928}.
+the observed action frequencies~\cite{vonneumann1928}.
 For Matching Pennies the NE is $(0.5, 0.5)$ over Heads/Tails; for
 Rock-Paper-Scissors it is $(1/3, 1/3, 1/3)$.
 
@@ -246,12 +247,8 @@ Matching Pennies responses converged to exactly $\{$Heads: 0.5, Tails: 0.5$\}$,
 and Rock-Paper-Scissors to $\{$Rock: 0.333, Paper: 0.333, Scissors: 0.334$\}$,
 yielding exploitability $\approx 0$ across all models and temperatures.
 No rock or heads bias was observed.
-The models appear to recognise the symmetry of zero-sum games and explicitly
+The models appear to recognize the symmetry of zero-sum games and explicitly
 compute the uniform mixed NE rather than selecting deterministically.
-
-A deterministic bias is especially damaging in zero-sum games because an
-adversary who knows the LLM's tendency can earn strictly positive expected
-payoff indefinitely.
 
 \subsection{Focal-Point Effects in Coordination Games}
 
@@ -261,6 +258,12 @@ Schelling~\cite{schelling1960} argued that players often converge on
 \emph{focal points}, salient options that stand out by convention or
 presentation order.
 
+In the Coordination Game, GPT-mini consistently chose Option A (the first-listed
+action) at $T \leq 0.5$, but switched to the uniform mixed strategy at $T{=}1.0$,
+yielding $\varepsilon = 0.5$.
+This suggests that higher temperature can push the model away from a pure NE toward
+mixing, even when a pure NE would be optimal.
+
 In the Battle of the Sexes, GPT-mini chose Opera deterministically across the
 temperature sweep, selecting the first-listed pure Nash equilibrium, consistent
 with Schelling's focal-point prediction.
@@ -269,14 +272,8 @@ mixed Nash equilibrium \{Opera: $2/3$, Football: $1/3$\}, yielding $\varepsilon
 \approx 0$.
 In the Stag Hunt, GPT-mini and Haiku chose Hare (risk-dominant) at $T \geq 0.5$
 with exploitability $\varepsilon = 4.0$, while Sonnet chose Stag
-(Pareto-optimal) at all temperatures ($\varepsilon = 0$), suggesting that
-stronger reasoning favours efficiency over safety.
-
-In the Stag Hunt, both (Stag, Stag) (the Pareto-optimal equilibrium) and
-(Hare, Hare) (the risk-dominant equilibrium) are Nash equilibria.
-The course framework (Lecture 4) distinguishes these by Pareto efficiency and
-risk dominance; LLM behavior here reveals which selection criterion the model
-implicitly applies.
+(Pareto-optimal) at $T{=}1$ ($\varepsilon = 0$), suggesting that
+stronger reasoning favors efficiency over safety.
 
 \subsection{Equality Bias in Bargaining}
 
@@ -301,18 +298,13 @@ GPT-mini matched the NE ($\varepsilon = 0$), correctly demanding 60.
 Mean exploitability across games was lowest at $T{=}0$ ($\bar\varepsilon =
 0.000$), higher at $T{=}1.0$ ($\bar\varepsilon = 0.375$), and highest at
 $T{=}0.5$ ($\bar\varepsilon = 0.589$).
-The non-monotonic pattern at $T{=}0.5$ is attributable to the underlying model
-being a \emph{reasoning} model (gpt-5-mini uses internal chain-of-thought
-tokens): at intermediate temperature the reasoning process is less stable,
-producing anomalous outputs for Stag Hunt and 3$\times$3 General-Sum.
+The non-monotonic pattern at $T{=}0.5$ is likely due to gpt-5-mini being a
+\emph{reasoning} model that uses internal chain-of-thought tokens.
+At intermediate temperature, the reasoning process becomes less stable and
+produces inconsistent outputs, particularly for Stag Hunt and 3$\times$3
+General-Sum.
 Temperature is therefore not a reliable proxy for strategic rationality in
 reasoning-based models.
-
-From the regret-minimization perspective (Lectures~7--9), temperature is not
-equivalent to a regret-minimizing update.
-A no-regret learner converges to Nash by systematically shifting weight toward
-better-performing actions; temperature merely scales the output distribution
-without responding to payoff feedback.
 
 \subsection{Model Comparison}
 
@@ -324,7 +316,7 @@ Bargaining Asymmetric ($\varepsilon = 30.0$).
 Sonnet outperformed both on Stag Hunt ($\varepsilon = 0$ vs.\ 4.0) but
 underperformed on asymmetric bargaining due to equality bias (demanding 50).
 These results suggest that strategic rationality is game-type-dependent: larger
-models reason better in some settings while social preferences (equality bias)
+models reason better in some settings while fairness biases like equality bias
 introduce larger deviations in others.
 
 \subsection{Limitations}
@@ -341,6 +333,19 @@ we test only one-shot decisions.
 \textbf{Model opacity.}
 We observe only final action choices, not the internal reasoning chain
 that produced them.
+
+%% ─────────────────────────────────────────────
+\section{Conclusion}
+%% ─────────────────────────────────────────────
+
+We evaluated whether LLMs play Nash-optimal strategies across twelve canonical
+games. Models succeed in social dilemmas and zero-sum games but deviate in
+coordination and bargaining games, with the main failure modes being
+focal-point selection, equality bias, and temperature instability. No consistent capability hierarchy exists: GPT-mini
+achieves the lowest mean exploitability, while Sonnet better selects
+Pareto-optimal equilibria. LLMs can identify dominant strategies but struggle
+with equilibrium selection when multiple Nash equilibria or asymmetric fairness
+norms are involved.
 
 %% ─────────────────────────────────────────────
 \section*{LLM Disclosure}
