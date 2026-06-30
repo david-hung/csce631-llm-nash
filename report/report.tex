@@ -31,8 +31,8 @@ approximate Nash equilibrium (NE) strategies?
 
 A Nash equilibrium is a strategy profile from which no player can profitably deviate
 unilaterally~\cite{nash1950equilibrium}.
-If an LLM's strategy is exploitable (i.e., an opponent can earn positive surplus
-by best-responding to it), then the model is not playing Nash.
+If an LLM's strategy is exploitable (i.e., an opponent can earn a higher expected
+payoff by deviating from it), then the model is not playing Nash.
 Measuring this gap is important: an LLM acting as a negotiation agent, auction
 bidder, or game-playing AI that systematically cooperates when defection is dominant,
 or fails to randomize in zero-sum games, is strategically irrational and can be
@@ -44,7 +44,7 @@ LLM API gateway at multiple temperatures and across three model families.
 LLM responses are converted to probability distributions over actions, and
 \emph{exploitability} relative to the known NE is computed per game.
 The result is a quantitative map of where and how LLMs deviate from rational play,
-analyzed through the formal vocabulary of the course.
+analyzed through the formal vocabulary of game theory.
 Our key findings are: (1) no cooperation bias in social dilemmas, (2) correct
 randomization in zero-sum games, (3) focal-point selection in coordination games,
 and (4) systematic deviations in asymmetric bargaining.
@@ -96,7 +96,8 @@ $\varepsilon(\sigma) < 10^{-3}$ (defined below).
 
 \subsection{Exploitability}
 
-For a strategy profile $(\sigma_1, \sigma_2)$, total exploitability is:
+For a strategy profile $(\sigma_1, \sigma_2)$, where $u_i(\sigma_1, \sigma_2)$
+denotes player $i$'s expected payoff, total exploitability is:
 \begin{align}
   \varepsilon(\sigma_1, \sigma_2)
     &= \underbrace{\max_a u_1(a,\sigma_2) - u_1(\sigma_1,\sigma_2)}_{\text{row regret}}
@@ -104,9 +105,9 @@ For a strategy profile $(\sigma_1, \sigma_2)$, total exploitability is:
     &\quad + \underbrace{\max_b u_2(\sigma_1,b) - u_2(\sigma_1,\sigma_2)}_{\text{col regret}}
   \label{eq:exploit}
 \end{align}
-At a Nash equilibrium $\varepsilon = 0$ by definition.
+At a Nash equilibrium, $\varepsilon = 0$ by definition.
 This metric connects directly to the regret-minimization framework of
-Lectures~7--9~\cite{zinkevich2007}: a no-regret learner converges to Nash, so
+Zinkevich et al.~\cite{zinkevich2007}: a no-regret learner converges to Nash, so
 exploitability bounds how far the LLM deviates from a no-regret policy.
 We fix the column player to the NE strategy and measure the row player's (LLM's)
 exploitability against that Nash opponent.
@@ -119,6 +120,8 @@ Each game is presented as a labeled payoff matrix with a system prompt instructi
 the model to act as a rational decision-maker and respond with only an action name
 or a JSON probability distribution.
 
+Temperature $T$ controls the randomness of model outputs: $T{=}0$ is nearly
+deterministic, while higher values produce more varied responses.
 We run two experimental conditions:
 
 \textbf{Temperature sweep.} \texttt{protected.gpt-5-mini} is queried at
@@ -130,9 +133,10 @@ $T = 1$ exactly and is therefore unsuitable for this condition.
 \texttt{gpt-5-mini}, \texttt{Claude-Haiku-4.5}, and \texttt{Claude-Sonnet-4.5}.
 
 Each (game, condition) cell is queried $N = 5$ times.
-Responses are parsed into probability distributions using a cascade: JSON
-dictionary $\to$ single action name $\to$ percentage mentions $\to$ uniform
-fallback.
+Responses are parsed into probability distributions using a cascade: first as a
+JSON dictionary of action probabilities, then as a single named action, then by
+extracting any percentage values mentioned, and finally falling back to a uniform
+distribution if no action can be identified.
 The five distributions are averaged per cell.
 
 %% ─────────────────────────────────────────────
@@ -270,16 +274,17 @@ with Schelling's focal-point prediction.
 In the model comparison at $T{=}1$, all three models returned the row player's
 mixed Nash equilibrium \{Opera: $2/3$, Football: $1/3$\}, yielding $\varepsilon
 \approx 0$.
-In the Stag Hunt, GPT-mini and Haiku chose Hare (risk-dominant) at $T \geq 0.5$
-with exploitability $\varepsilon = 4.0$, while Sonnet chose Stag
-(Pareto-optimal) at $T{=}1$ ($\varepsilon = 0$), suggesting that
-stronger reasoning favors efficiency over safety.
+In the Stag Hunt, GPT-mini chose Hare (risk-dominant) at $T \geq 0.5$
+($\varepsilon = 4.0$), and Haiku also chose Hare at $T{=}1$ ($\varepsilon = 4.0$),
+while Sonnet chose Stag (Pareto-optimal) at $T{=}1$ ($\varepsilon = 0$),
+suggesting that stronger reasoning favors efficiency over safety.
 
 \subsection{Equality Bias in Bargaining}
 
 The Nash Bargaining Solution (NBS) maximizes the Nash product
-$\prod_i (u_i - d_i)$ over the feasible set, where $d_i$ is player $i$'s
-disagreement payoff~\cite{nash1950bargaining}.
+$\prod_i (u_i - d_i)$ over the set of feasible outcomes, where $d_i$ is
+player $i$'s disagreement payoff (the payoff each player receives if no deal
+is reached)~\cite{nash1950bargaining}.
 In the asymmetric variant (Row's outside option = 30, Col's = 10, surplus = 100),
 the NBS assigns Row a payoff of 60 and Col a payoff of 40.
 An LLM exhibiting \emph{equality bias} would instead demand 50,
